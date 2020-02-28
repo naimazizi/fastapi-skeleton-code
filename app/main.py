@@ -7,12 +7,11 @@ from loguru import logger
 from asyncpg.pool import Pool
 import time
 
-import setting
-from services.database import Database
-from repository.test_repository import test_query
+from app import setting
+from app.services.database import Database
+from app.repository.test_repository import test_query
 
 logger.add("service.log", rotation='10 MB')
-logger.info('Starting web services')
 
 
 app = FastAPI()
@@ -29,6 +28,7 @@ database = Database(
 
 @app.on_event('startup')
 async def startup() -> None:
+    logger.info('Starting web services')
     logger.info('Creating connection to database')
     await database.connect()
     logger.info('Connection to database has been successfully created')

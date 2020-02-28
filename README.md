@@ -18,8 +18,47 @@ Already integrated with postgres using asynchronous library (**asyncpg**), **swa
    ```
    pip -r requirements.txt
    ```
-5. Run web services
+5. Testing can be initiated by using:
    ```
-    python app/main.py
+    pytest tests
    ```
-6. Swagger can be accesed on [http://localhost:8000/docs](http://localhost:8000/docs).
+6. Run web service
+   ```
+    uvicorn app.main:app --reload
+   ```
+7. Swagger can be accesed on [http://localhost:8000/docs](http://localhost:8000/docs).
+
+## Debbuger on VScode
+Set *launch.json* as below:
+* Conda
+```
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Uvicorn",
+            "type": "python",
+            "request": "launch",
+            "module": "app.main",
+            "program": "/home/${USER}/anaconda3/envs/web/bin/uvicorn ${module}:app",
+            "console": "integratedTerminal"
+        }
+    ]
+}
+```
+* virtualenv
+```
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Uvicorn",
+            "type": "python",
+            "request": "launch",
+            "module": "app.main",
+            "program": "${workspaceRoot}/venv/bin/uvicorn ${module}:app",
+            "console": "integratedTerminal"
+        }
+    ]
+}
+```
