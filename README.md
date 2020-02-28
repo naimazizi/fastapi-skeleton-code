@@ -22,3 +22,4 @@ Already integrated with postgres using asynchronous library (**asyncpg**), **swa
    ```
     python app/main.py
    ```
+6. Swagger can be accesed on [http://localhost:8000/docs](http://localhost:8000/docs).
