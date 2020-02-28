@@ -1,9 +1,11 @@
 from fastapi import FastAPI, Depends
 from starlette.status import HTTP_200_OK
 from starlette.responses import Response
+from starlette.requests import Request
 import uvicorn
 from loguru import logger
 from asyncpg.pool import Pool
+import time
 
 import setting
 from services.database import Database
@@ -38,6 +40,15 @@ async def shutdown() -> None:
     await database.disconnect()
     logger.info('Connection to database has been successfully closed')
     logger.info('Web services has been shutdown')
+
+
+@app.middleware("http")
+async def add_process_time_header(request: Request, call_next):
+    start_time = time.time()
+    response = await call_next(request)
+    process_time = time.time() - start_time
+    response.headers["X-Process-Time"] = str(process_time)
+    return response
 
 
 # TODO: Delete this router then add router that follows this format.
