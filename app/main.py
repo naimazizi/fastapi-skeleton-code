@@ -11,6 +11,8 @@ from app import setting
 from app.routes import test_route
 from app.services.database import database
 from app.utils.utility_function import _trx_id_ctx_var
+from app.services.authentication import auth
+from app.repository.role_mgmt import get_cache_tag_role
 
 logger.remove()
 logger.add(
@@ -32,6 +34,8 @@ async def startup() -> None:
     logger.info('Starting web services')
     logger.info('Creating connection to database')
     await database.connect()
+    cache_tag_roles = get_cache_tag_role(database._pool)
+    await auth.set_cache(cache_tag_roles)
     logger.info('Connection to database has been successfully created')
 
 

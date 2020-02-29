@@ -1,5 +1,6 @@
 from asyncpg.pool import Pool
 from typing import List
+from datetime import date
 
 from app.utils.utility_function import query_and_log
 from app.models.response import DatetimeValue
@@ -7,7 +8,6 @@ from app.models.response import DatetimeValue
 
 # TODO: Delete this repository then add repository that follows this format.
 async def test_query(
-        trx_id: str,
         db_pool: Pool,
         condition: str = None) -> List[DatetimeValue]:
 
@@ -17,12 +17,16 @@ async def test_query(
             to_timestamp(cast(timestamp/1e6 as bigint))::date as date,
             count(*) as count
         from analytics_elastic_clean
+        where
+            to_timestamp(cast(timestamp/1e6 as bigint))::date >= $1
+            and to_timestamp(cast(timestamp/1e6 as bigint))::date <= $2
         group by 1
     ) t1;
     '''
 
     results = None
     async with db_pool.acquire() as connection:
-        results = await query_and_log(connection, query)
+        results = await query_and_log(
+            connection, query, date(2010, 1, 1), date(2020, 1, 20))
 
     return results

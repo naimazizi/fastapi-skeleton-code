@@ -9,6 +9,8 @@ chardet==3.0.4
 Click==7.0
 coverage==5.0
 cryptography==2.8
+dnspython==1.16.0
+email-validator==1.0.5
 fastapi==0.46.0
 graphene==2.1.8
 graphql-core==2.3.1
@@ -37,6 +39,7 @@ pyflakes==2.1.1
 PyJWT==1.7.1
 pylama==7.7.1
 pylint==2.4.4
+pymemcache==3.0.0
 pyOpenSSL==19.1.0
 pyparsing==2.4.6
 PySocks==1.7.1
