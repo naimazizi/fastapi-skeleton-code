@@ -1,5 +1,6 @@
 import asyncpg
 from loguru import logger
+
 from app import setting
 
 
@@ -33,9 +34,6 @@ class Database():
                 max_size=max_size,
                 max_queries=max_queries,
                 max_inactive_connection_lifetime=max_conn_lifetime)
-        else:
-            raise asyncpg.exceptions.TooManyConnectionsError(
-                'Connection pool has been created')
 
     async def disconnect(self) -> None:
         """
@@ -64,3 +62,6 @@ class Database():
                     port=setting.DB_PORT,
                     database=setting.DB_NAME)
         return cls._instance
+
+
+database = Database()
