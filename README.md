@@ -22,11 +22,16 @@ Already integrated with postgres using asynchronous library (**asyncpg**), **swa
    ```
     pytest tests
    ```
-6. Run web service on dev environment
+6. Code coverage can be initiated by using:
+   ```
+   python -m coverage run {python_test_file}.py
+   coverage report
+   ```
+7. Run web service on dev environment
    ```
     uvicorn app.main:app --reload
    ```
-7. Swagger can be accesed on [http://localhost:8000/docs](http://localhost:8000/docs).
+8. Swagger can be accesed on [http://localhost:8000/docs](http://localhost:8000/docs).
 
 ## Debbuger on VScode
 Set *launch.json* as below:
