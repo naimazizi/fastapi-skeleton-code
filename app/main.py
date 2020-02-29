@@ -11,19 +11,12 @@ from app import setting
 from app.services.database import Database
 from app.repository.test_repository import test_query
 
-logger.add("service.log", rotation='10 MB')
+logger.add(setting.LOG_NAME, rotation=setting.LOG_FILEROTATION)
 
 
 app = FastAPI()
 
-
-database = Database(
-    user=setting.DB_USERNAME,
-    password=setting.DB_PASSWORD,
-    database=setting.DB_NAME,
-    host=setting.DB_HOST,
-    port=setting.DB_PORT
-)
+database = Database()
 
 
 @app.on_event('startup')

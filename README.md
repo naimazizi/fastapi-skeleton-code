@@ -22,7 +22,7 @@ Already integrated with postgres using asynchronous library (**asyncpg**), **swa
    ```
     pytest tests
    ```
-6. Run web service
+6. Run web service on dev environment
    ```
     uvicorn app.main:app --reload
    ```
