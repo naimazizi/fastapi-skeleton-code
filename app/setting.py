@@ -27,3 +27,7 @@ DB_MAX_INACTIVE_CONN_LIFETIME = config(
 LOG_NAME = config("LOG_NAME", cast=str, default="log.log")
 
 LOG_FILEROTATION = config("LOG_FILEROTATION", cast=str, default="1 MB")
+
+JWT_SECRET_KEY = config("JWT_ALGORITHM", cast=str)
+
+JWT_ALGORITHM = config("JWT_ALGORITHM", cast=str, default='HS256')

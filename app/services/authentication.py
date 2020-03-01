@@ -1,4 +1,12 @@
-from typing import Dict, Optional, Set
+from typing import Dict, Optional, Set, List
+import jwt
+from loguru import logger
+
+from app import setting
+
+
+SECRET_KEY = setting.JWT_SECRET_KEY
+ALGORITHM = setting.JWT_ALGORITHM
 
 
 class Auth():
@@ -18,13 +26,29 @@ class Auth():
             return role in _roles
 
     @classmethod
-    async def set_cache(
+    def set_cache(
             cls, dictionary: Dict[str, Set[str]]
             ) -> None:
         if cls._instance is None:
             raise RuntimeError('Class instance is not found')
         else:
-            cls._dict = await dictionary
+            cls._dict = dictionary
+
+    # TODO: add this method to is_eligible.
+    def _decode_jwt(
+            jwt_string: str,
+            secret_key: str = SECRET_KEY,
+            algorithm: List[str] = [ALGORITHM]
+            ) -> Optional[Dict]:
+        payload = None
+        try:
+            payload = jwt.decode(jwt_string, secret_key, algorithms=algorithm)
+        except jwt.exceptions.PyJWTError:
+            logger.opt(Exception=True).error(
+                'Error in decoding jwt token using '
+                'secret key: {} and algorithms {}',
+                secret_key, ','.join(algorithm))
+        return payload
 
     def __new__(cls):
         if cls._instance is None:
