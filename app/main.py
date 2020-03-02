@@ -34,8 +34,8 @@ async def startup() -> None:
     logger.info('Starting web services')
     logger.info('Creating connection to database')
     await database.connect()
-    cache_tag_roles = get_cache_tag_role(database._pool)
-    await auth.set_cache(cache_tag_roles)
+    cache_tag_roles = await get_cache_tag_role(database._pool)
+    auth.set_cache(cache_tag_roles)
     logger.info('Connection to database has been successfully created')
 
 
