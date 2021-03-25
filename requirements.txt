@@ -46,7 +46,7 @@ PySocks==1.7.1
 pytest==5.3.5
 python-dateutil==2.8.1
 python-multipart==0.0.5
-PyYAML==5.3
+PyYAML==5.4
 requests==2.23.0
 rope==0.16.0
 Rx==1.6.1
