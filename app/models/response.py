@@ -13,15 +13,15 @@ class CategoricalValue(BaseModel):
     value: int = 0
 
 
-class ResponseModel():
-    def __init__(self, status_code: str, data: Any):
+class ResponseModel:
+    def __init__(self, status_code: int, data: Any):
         self.status_code = status_code
         self.data = data
 
     @property
-    def data(self):
+    def get_data(self):
         return self.data
 
     @property
-    def status_code(self):
+    def get_status_code(self):
         return self.status_code
