@@ -1,5 +1,5 @@
 # FastAPI skeleton-code
-Skeleton Code of web framework that offers high performance and minimal boiler code for building APIs using **FastAPI**. 
+Skeleton Code of web framework that offers high performance and minimal boiler code for building APIs using **FastAPI**.
 
 Already integrated with postgres using asynchronous library (**asyncpg**), **swagger** and production grade ASGI server using **Uvicorn**.
 
@@ -11,10 +11,10 @@ Already integrated with postgres using asynchronous library (**asyncpg**), **swa
 2. create `.env` configuration file using `.env.example` as baseline
 3. create python virtual environment
     ```
-    python3 -m venv env
+    python3 -m venv .venv
     source env/bin/activate
     ```
-4. Install python library on requirements.txt 
+4. Install python library on requirements.txt
    ```
    pip -r requirements.txt
    ```
@@ -29,7 +29,7 @@ Already integrated with postgres using asynchronous library (**asyncpg**), **swa
    ```
 7. Run web service on dev environment
    ```
-    uvicorn app.main:app --reload
+    fastapi dev app/main.py
    ```
 8. Swagger can be accesed on [http://localhost:8000/docs](http://localhost:8000/docs).
 

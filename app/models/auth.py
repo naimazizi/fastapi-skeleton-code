@@ -1,15 +1,15 @@
 from pydantic import BaseModel
-from typing import Set
+from typing import Optional, Set
 
 
 class User(BaseModel):
     username: str
-    email: str = None
-    full_name: str = None
-    disabled: bool = None
+    email: Optional[str] = None
+    full_name: Optional[str] = None
+    disabled: Optional[bool] = None
     role: str
 
 
-class TagRoles():
+class TagRoles:
     tag: str
     roles: Set[str]

@@ -9,7 +9,7 @@ SECRET_KEY = setting.JWT_SECRET_KEY
 ALGORITHM = setting.JWT_ALGORITHM
 
 
-class Auth():
+class Auth:
     _instance = None
     _dict: Dict[str, Set[str]] = dict()
 
@@ -26,28 +26,28 @@ class Auth():
             return role in _roles
 
     @classmethod
-    def set_cache(
-            cls, dictionary: Dict[str, Set[str]]
-            ) -> None:
+    def set_cache(cls, dictionary: Dict[str, Set[str]]) -> None:
         if cls._instance is None:
-            raise RuntimeError('Class instance is not found')
+            raise RuntimeError("Class instance is not found")
         else:
             cls._dict = dictionary
 
     # TODO: add this method to is_eligible.
-    def _decode_jwt(
-            jwt_string: str,
-            secret_key: str = SECRET_KEY,
-            algorithm: List[str] = [ALGORITHM]
-            ) -> Optional[Dict]:
+    def decode_jwt(
+        self,
+        jwt_string: str,
+        secret_key: str = SECRET_KEY,
+        algorithm: List[str] = [ALGORITHM],
+    ) -> Optional[Dict]:
         payload = None
         try:
             payload = jwt.decode(jwt_string, secret_key, algorithms=algorithm)
-        except jwt.exceptions.PyJWTError:
-            logger.opt(Exception=True).error(
-                'Error in decoding jwt token using '
-                'secret key: {} and algorithms {}',
-                secret_key, ','.join(algorithm))
+        except jwt.PyJWTError:
+            logger.opt(exception=True).error(
+                "Error in decoding jwt token using " "secret key: {} and algorithms {}",
+                secret_key,
+                ",".join(algorithm),
+            )
         return payload
 
     def __new__(cls):

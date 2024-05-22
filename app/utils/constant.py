@@ -1,1 +1,1 @@
-TAG_TEST = 'test'
+TAG_TEST = "test"
